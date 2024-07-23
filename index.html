@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-size: 18px;
+      }
+      div {
+        padding: 12px;
+      }
+
+      div > * {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="" id="form">
+      <div>
+        <textarea name="str" id="" rows="6"></textarea>
+      </div>
+      <div>
+        <input type="file" name="file" />
+      </div>
+    </form>
+    <div>
+      <button>发送</button>
+    </div>
+
+    <script>
+      const btn = document.querySelector("button");
+      btn.addEventListener("click", function () {
+        const form = document.querySelector("#form");
+        const formData = new FormData(form);
+        fetch("/upload", {
+          method: "POST",
+          body: formData,
+        })
+          .then((r) => r.text())
+          .then((r) => alert(r));
+      });
+    </script>
+  </body>
+</html>
